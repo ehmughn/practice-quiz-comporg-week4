@@ -4,3 +4,39 @@ computer performance
 
 A ___ is defined as the process by which a computer system's resources and outputs are assessed to determine whether the system is performing at an optimal level.
 computer performance evaluation
+
+In evaluating a computer's performance, a number of parameters are used to determine the result. Examples are ___, and more. Standards, or points of reference, are used against the parameters, and an assessment is given.
+latency, speed, throughput, bandwidth
+
+This process is known as ___. It is not an easy task to create benchmarks for assessing computer performance. The primary challenge is that technological characteristics are constantly changing.
+benchmarking
+
+A ___ is simply a test that is used to compare similar products. A computer benchmarking program works by running a series of well-defined tests on the PC to measure its performance.
+benchmark
+
+___ produce a score that you can use to compare PC systems. A higher score indicates better performance. Comparing benchmark scores is far easier than comparing complex technical specifications.
+Benchmarks
+
+The ___ is defined as the total time lapse between the completion of an inquiry or demand made on a system resource and the receipt of a response. In real life, it can be compared to the time between placing an order to receiving a delivery
+response time
+
+___ is the term used to describe the state of existence of something in transition. Every transmitted piece of information on a computer system travels over some sort of medium
+Latency
+
+___ is defined as the time it takes to communicate a message, or the time the message spends traveling the geographical distance ('on the wire') before it gets to its desired destination. This can be compared to the time one spends on an aircraft, traveling from one geographical location to another.
+Computer latency
+
+The term ___ is usually in reference to the clock speed of the processor. The clock speed is defined as the clock cycles per second, which determines the rate at which instruction processing takes place. It is usually measured in megahertz (MHz) or gigahertz (GHz).
+speed
+
+___ is one of the leading parameters in assessing a computer's performance.
+Computer speed
+
+Computer function consists of millions of data transmissions between devices and components. The computer's ___ is defined as the number of units of information that can be successfully processed at any given time.
+throughput
+
+The ___ is commonly measured using bits per second (bps)—more specifically, megabits per second (Mbps) and gigabits per second (Gbps). For example, if the post office can receive and process a maximum of 1000 items per day, then that's its throughput
+throughput
+
+___ is a measure of the maximum rate at which data can be transferred between components of the computer system, or the amount of data that is sent at any particular time across a specific connection.
+Bandwidth

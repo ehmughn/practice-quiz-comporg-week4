@@ -78,7 +78,10 @@ public class NormalModeActivity extends AppCompatActivity {
         dialog_results = new Dialog(NormalModeActivity.this);
         dialog_results.setContentView(R.layout.quiz_result);
         dialog_results.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog_results.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
         dialog_results.setCancelable(false);
+        textView_dialogMode = dialog_results.findViewById(R.id.textview_mode);
+        textView_dialogScore = dialog_results.findViewById(R.id.textview_score);
         button_dialogTryAgain = dialog_results.findViewById(R.id.button_tryAgain);
         button_dialogTryAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,9 +162,9 @@ public class NormalModeActivity extends AppCompatActivity {
     private void showResults() {
         String displayMode = "Mode: Normal";
         String displayScore = score + "/" + total;
-        dialog_results.show();
         textView_dialogMode.setText(displayMode);
         textView_dialogScore.setText(displayScore);
+        dialog_results.show();
     }
 }
 
