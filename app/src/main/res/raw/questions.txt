@@ -1,1 +1,6 @@
-hello
+
+___ is the efficiency of a given computer system, or how well the computer performs, when taking all aspects into account.
+computer performance
+
+A ___ is defined as the process by which a computer system's resources and outputs are assessed to determine whether the system is performing at an optimal level.
+computer performance evaluation
