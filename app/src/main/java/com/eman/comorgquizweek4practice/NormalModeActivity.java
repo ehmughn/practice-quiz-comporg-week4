@@ -22,10 +22,16 @@ public class NormalModeActivity extends AppCompatActivity {
 
     ArrayList<Item> items;
     int questionNumber = -1;
+    int score;
+    int total;
     TextView textView_questionNumber;
     TextView textView_question;
     EditText editText_answer;
     Button button_submitAnswer;
+    TextView textView_displayQuestionResult;
+    TextView textView_yourAnswer;
+    TextView textView_correctAnswer;
+    Button button_nextQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class NormalModeActivity extends AppCompatActivity {
         });
         items = new ArrayList<>();
         questionNumber = -1;
+        score = 0;
+        total = 0;
         textView_questionNumber = findViewById(R.id.textview_question_number);
         textView_question = findViewById(R.id.textview_question);
         editText_answer = findViewById(R.id.edittext_answer);
@@ -46,7 +54,16 @@ public class NormalModeActivity extends AppCompatActivity {
         button_submitAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                button_submitAnswer.setClickable(false);
+                checkAnswer();
+            }
+        });
+        textView_displayQuestionResult = findViewById(R.id.textview_displayquestionresult);
+        textView_yourAnswer = findViewById(R.id.textview_youranswer);
+        textView_correctAnswer = findViewById(R.id.textview_correctanswer);
+        button_nextQuestion = findViewById(R.id.button_next_question);
+        button_nextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 nextQuestion();
             }
         });
@@ -60,6 +77,7 @@ public class NormalModeActivity extends AppCompatActivity {
                 String question = reader.readLine();
                 String answer = reader.readLine();
                 items.add(new Item(question, answer));
+                total++;
             }
         }
         catch (Exception ignore) {
@@ -68,15 +86,42 @@ public class NormalModeActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
+        button_submitAnswer.setClickable(true);
+        button_nextQuestion.setVisibility(View.INVISIBLE);
+        textView_displayQuestionResult.setVisibility(View.INVISIBLE);
+        textView_yourAnswer.setVisibility(View.INVISIBLE);
+        textView_correctAnswer.setVisibility(View.INVISIBLE);
         questionNumber++;
         if(questionNumber >= items.size()) {
             return;
         }
         String newQuestionNumber = "Question no." + (questionNumber + 1);
         String newQuestion = items.get(questionNumber).question;
-        String newAnswer = items.get(questionNumber).answer;
         textView_questionNumber.setText(newQuestionNumber);
         textView_question.setText(newQuestion);
+    }
+
+    private void checkAnswer() {
+        String correct = "Correct!";
+        String wrong = "Wrong :(";
+        String displayYourAnswer = "Your Answer: " + editText_answer.getText().toString();
+        String displayCorrectAnswer = "Correct Answer: " + items.get(questionNumber).answer;
+        button_submitAnswer.setClickable(false);
+        button_nextQuestion.setVisibility(View.VISIBLE);
+        textView_displayQuestionResult.setVisibility(View.VISIBLE);
+        String entered_answer = editText_answer.getText().toString().toLowerCase();
+        String correct_answer = items.get(questionNumber).answer.toLowerCase();
+        if(entered_answer.equals(correct_answer)) {
+            score++;
+            textView_displayQuestionResult.setText(correct);
+        }
+        else {
+            textView_displayQuestionResult.setText(wrong);
+            textView_yourAnswer.setVisibility(View.VISIBLE);
+            textView_correctAnswer.setVisibility(View.VISIBLE);
+            textView_yourAnswer.setText(displayYourAnswer);
+            textView_correctAnswer.setText(displayCorrectAnswer);
+        }
     }
 }
 
