@@ -10,7 +10,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
 
 public class NormalModeActivity extends AppCompatActivity {
 
@@ -33,11 +36,11 @@ public class NormalModeActivity extends AppCompatActivity {
         textView_questionNumber = findViewById(R.id.textview_question_number);
         textView_question = findViewById(R.id.textview_question);
         editText_answer = findViewById(R.id.edittext_answer);
-        try(FileWriter writer = new FileWriter("test.txt")){
-            writer.write("test");
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(this.getResources().openRawResource(R.raw.questions)))){
+            textView_question.setText(reader.readLine());
         }
         catch (Exception e) {
-            //
+            textView_question.setText(e.getMessage());
         }
     }
 
