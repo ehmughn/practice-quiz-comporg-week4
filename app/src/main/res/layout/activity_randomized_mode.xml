@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RandomizedModeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_mode_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Randomized Mode"
+            android:textAlignment="center"
+            android:textSize="35sp"/>
+
+        <TextView
+            android:id="@+id/textview_question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Question no. 1"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textview_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="What is the 15 + 43 * 62 / 2^3?"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/edittext_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Enter answer here"/>
+
+        <Button
+            android:id="@+id/button_submit_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit answer"/>
+
+        <TextView
+            android:id="@+id/textview_displayquestionresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            android:text="Correct!"
+            android:textAlignment="center"
+            android:textSize="40sp"/>
+
+        <TextView
+            android:id="@+id/textview_youranswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            android:text="Your Answer: "
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textview_correctanswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="Correct Answer: "
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/button_next_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="Next Question"/>
+
+    </LinearLayout>
+
+</LinearLayout>

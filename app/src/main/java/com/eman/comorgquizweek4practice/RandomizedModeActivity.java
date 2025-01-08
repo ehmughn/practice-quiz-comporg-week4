@@ -20,8 +20,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class NormalModeActivity extends AppCompatActivity {
+public class RandomizedModeActivity extends AppCompatActivity {
 
     ArrayList<Item> items;
     int questionNumber = -1;
@@ -75,7 +76,7 @@ public class NormalModeActivity extends AppCompatActivity {
                 nextQuestion();
             }
         });
-        dialog_results = new Dialog(NormalModeActivity.this);
+        dialog_results = new Dialog(RandomizedModeActivity.this);
         dialog_results.setContentView(R.layout.quiz_result);
         dialog_results.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog_results.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
@@ -87,7 +88,7 @@ public class NormalModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog_results.dismiss();
-                Intent intent = new Intent(NormalModeActivity.this, NormalModeActivity.class);
+                Intent intent = new Intent(RandomizedModeActivity.this, RandomizedModeActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -101,6 +102,7 @@ public class NormalModeActivity extends AppCompatActivity {
             }
         });
         importQuestions();
+        shuffleItems();
         nextQuestion();
     }
 
@@ -160,10 +162,21 @@ public class NormalModeActivity extends AppCompatActivity {
     }
 
     private void showResults() {
-        String displayMode = "Mode: Normal";
+        String displayMode = "Mode: Randomized";
         String displayScore = score + "/" + total;
         textView_dialogMode.setText(displayMode);
         textView_dialogScore.setText(displayScore);
         dialog_results.show();
+    }
+
+    private void shuffleItems() {
+        for(int i = 0; i < items.size(); i++) {
+            Random random = new Random();
+            int num1 = random.nextInt(items.size());
+            int num2 = random.nextInt(items.size());
+            Item tempItem = items.get(num1);
+            items.set(num1, items.get(num2));
+            items.set(num2, tempItem);
+        }
     }
 }

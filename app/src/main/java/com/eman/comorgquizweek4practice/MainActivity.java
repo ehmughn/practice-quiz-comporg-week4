@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     Button button_normal;
+    Button button_randomized;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +33,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        button_randomized = findViewById(R.id.button_randomized);
+        button_randomized.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RandomizedModeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+}
+
+class Item {
+    String question;
+    String answer;
+
+    Item(String _question, String _answer) {
+        question = _question;
+        answer = _answer;
+    }
+
 }
