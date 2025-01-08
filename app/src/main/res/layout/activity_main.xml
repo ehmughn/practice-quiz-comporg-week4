@@ -42,5 +42,13 @@
         android:layout_height="wrap_content"
         android:text="Endless Mode"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Made by: Eman Bawalan :)"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
 
 </LinearLayout>
