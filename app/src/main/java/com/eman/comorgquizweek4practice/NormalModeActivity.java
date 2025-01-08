@@ -109,8 +109,8 @@ public class NormalModeActivity extends AppCompatActivity {
         button_submitAnswer.setClickable(false);
         button_nextQuestion.setVisibility(View.VISIBLE);
         textView_displayQuestionResult.setVisibility(View.VISIBLE);
-        String entered_answer = editText_answer.getText().toString().toLowerCase();
-        String correct_answer = items.get(questionNumber).answer.toLowerCase();
+        String entered_answer = editText_answer.getText().toString().toLowerCase().trim();
+        String correct_answer = items.get(questionNumber).answer.toLowerCase().trim();
         if(entered_answer.equals(correct_answer)) {
             score++;
             textView_displayQuestionResult.setText(correct);
