@@ -99,6 +99,7 @@ public class NormalModeActivity extends AppCompatActivity {
         String newQuestion = items.get(questionNumber).question;
         textView_questionNumber.setText(newQuestionNumber);
         textView_question.setText(newQuestion);
+        editText_answer.setText("");
     }
 
     private void checkAnswer() {
