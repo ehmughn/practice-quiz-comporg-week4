@@ -5,42 +5,48 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".NormalModeActivity">
 
     <TextView
+        android:id="@+id/textview_mode_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Computer Organization and Architecture"
+        android:text="Normal Mode"
         android:textAlignment="center"
         android:textSize="35sp"/>
 
     <TextView
+        android:id="@+id/textview_question_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Week 4 Practice Quiz"
+        android:layout_marginTop="50dp"
+        android:text="Question no. 1"
         android:textAlignment="center"
         android:textSize="20sp"/>
 
-    <Button
-        android:id="@+id/button_normal"
+    <TextView
+        android:id="@+id/textview_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Normal Mode"/>
+        android:layout_marginTop="10dp"
+        android:text="What is the 15 + 43 * 62 / 2^3?"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edittext_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter answer here"/>
 
     <Button
-        android:id="@+id/button_randomized"
+        android:id="@+id/button_submit_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Randomized Mode"/>
-
-    <Button
-        android:id="@+id/button_endless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Endless Mode"/>
+        android:text="Submit answer"/>
 
 
 </LinearLayout>
