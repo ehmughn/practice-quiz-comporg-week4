@@ -1,7 +1,10 @@
 package com.eman.comorgquizweek4practice;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +35,11 @@ public class NormalModeActivity extends AppCompatActivity {
     TextView textView_yourAnswer;
     TextView textView_correctAnswer;
     Button button_nextQuestion;
+    Dialog dialog_results;
+    TextView textView_dialogMode;
+    TextView textView_dialogScore;
+    Button button_dialogTryAgain;
+    Button button_dialogHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,28 @@ public class NormalModeActivity extends AppCompatActivity {
                 nextQuestion();
             }
         });
+        dialog_results = new Dialog(NormalModeActivity.this);
+        dialog_results.setContentView(R.layout.quiz_result);
+        dialog_results.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog_results.setCancelable(false);
+        button_dialogTryAgain = dialog_results.findViewById(R.id.button_tryAgain);
+        button_dialogTryAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_results.dismiss();
+                Intent intent = new Intent(NormalModeActivity.this, NormalModeActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
+        button_dialogHome = dialog_results.findViewById(R.id.button_home);
+        button_dialogHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_results.dismiss();
+                finish();
+            }
+        });
         importQuestions();
         nextQuestion();
     }
@@ -93,6 +123,7 @@ public class NormalModeActivity extends AppCompatActivity {
         textView_correctAnswer.setVisibility(View.INVISIBLE);
         questionNumber++;
         if(questionNumber >= items.size()) {
+            showResults();
             return;
         }
         String newQuestionNumber = "Question no." + (questionNumber + 1);
@@ -123,6 +154,14 @@ public class NormalModeActivity extends AppCompatActivity {
             textView_yourAnswer.setText(displayYourAnswer);
             textView_correctAnswer.setText(displayCorrectAnswer);
         }
+    }
+
+    private void showResults() {
+        String displayMode = "Mode: Normal";
+        String displayScore = score + "/" + total;
+        dialog_results.show();
+        textView_dialogMode.setText(displayMode);
+        textView_dialogScore.setText(displayScore);
     }
 }
 
