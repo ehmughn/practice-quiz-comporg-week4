@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
     Button button_normal;
     Button button_randomized;
+    Button button_endless;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RandomizedModeActivity.class);
+                startActivity(intent);
+            }
+        });
+        button_endless = findViewById(R.id.button_endless);
+        button_endless.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EndlessModeActivity.class);
                 startActivity(intent);
             }
         });

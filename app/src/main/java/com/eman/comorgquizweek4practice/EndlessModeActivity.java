@@ -22,12 +22,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RandomizedModeActivity extends AppCompatActivity {
+public class EndlessModeActivity extends AppCompatActivity {
 
     ArrayList<Item> items;
+    int randomQuestion;
     int questionNumber = -1;
     int score;
-    int total;
+    boolean done;
     TextView textView_questionNumber;
     TextView textView_question;
     EditText editText_answer;
@@ -46,7 +47,7 @@ public class RandomizedModeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_randomized_mode);
+        setContentView(R.layout.activity_endless_mode);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -55,7 +56,7 @@ public class RandomizedModeActivity extends AppCompatActivity {
         items = new ArrayList<>();
         questionNumber = -1;
         score = 0;
-        total = 0;
+        done = false;
         textView_questionNumber = findViewById(R.id.textview_question_number);
         textView_question = findViewById(R.id.textview_question);
         editText_answer = findViewById(R.id.edittext_answer);
@@ -76,7 +77,7 @@ public class RandomizedModeActivity extends AppCompatActivity {
                 nextQuestion();
             }
         });
-        dialog_results = new Dialog(RandomizedModeActivity.this);
+        dialog_results = new Dialog(EndlessModeActivity.this);
         dialog_results.setContentView(R.layout.quiz_result);
         dialog_results.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog_results.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_background));
@@ -88,7 +89,7 @@ public class RandomizedModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog_results.dismiss();
-                Intent intent = new Intent(RandomizedModeActivity.this, RandomizedModeActivity.class);
+                Intent intent = new Intent(EndlessModeActivity.this, EndlessModeActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -102,7 +103,6 @@ public class RandomizedModeActivity extends AppCompatActivity {
             }
         });
         importQuestions();
-        shuffleItems();
         nextQuestion();
     }
 
@@ -112,7 +112,6 @@ public class RandomizedModeActivity extends AppCompatActivity {
                 String question = reader.readLine();
                 String answer = reader.readLine();
                 items.add(new Item(question, answer));
-                total++;
             }
         }
         catch (Exception ignore) {
@@ -126,13 +125,15 @@ public class RandomizedModeActivity extends AppCompatActivity {
         textView_displayQuestionResult.setVisibility(View.INVISIBLE);
         textView_yourAnswer.setVisibility(View.INVISIBLE);
         textView_correctAnswer.setVisibility(View.INVISIBLE);
-        questionNumber++;
-        if(questionNumber >= items.size()) {
+        if(done) {
             showResults();
             return;
         }
+        Random random = new Random();
+        questionNumber++;
+        randomQuestion = random.nextInt(items.size());
         String newQuestionNumber = "Question no." + (questionNumber + 1);
-        String newQuestion = items.get(questionNumber).question;
+        String newQuestion = items.get(randomQuestion).question;
         textView_questionNumber.setText(newQuestionNumber);
         textView_question.setText(newQuestion);
         editText_answer.setText("");
@@ -142,12 +143,12 @@ public class RandomizedModeActivity extends AppCompatActivity {
         String correct = "Correct!";
         String wrong = "Wrong :(";
         String displayYourAnswer = "Your Answer: " + editText_answer.getText().toString();
-        String displayCorrectAnswer = "Correct Answer: " + items.get(questionNumber).answer;
+        String displayCorrectAnswer = "Correct Answer: " + items.get(randomQuestion).answer;
         button_submitAnswer.setClickable(false);
         button_nextQuestion.setVisibility(View.VISIBLE);
         textView_displayQuestionResult.setVisibility(View.VISIBLE);
         String entered_answer = editText_answer.getText().toString().toLowerCase().trim();
-        String correct_answer = items.get(questionNumber).answer.toLowerCase().trim();
+        String correct_answer = items.get(randomQuestion).answer.toLowerCase().trim();
         if(entered_answer.equals(correct_answer)) {
             score++;
             textView_displayQuestionResult.setText(correct);
@@ -158,25 +159,15 @@ public class RandomizedModeActivity extends AppCompatActivity {
             textView_correctAnswer.setVisibility(View.VISIBLE);
             textView_yourAnswer.setText(displayYourAnswer);
             textView_correctAnswer.setText(displayCorrectAnswer);
+            done = true;
         }
     }
 
     private void showResults() {
-        String displayMode = "Mode: Randomized";
-        String displayScore = score + "/" + total;
+        String displayMode = "Mode: Endless";
+        String displayScore = "Streak: " + score;
         textView_dialogMode.setText(displayMode);
         textView_dialogScore.setText(displayScore);
         dialog_results.show();
-    }
-
-    private void shuffleItems() {
-        for(int i = 0; i < items.size(); i++) {
-            Random random = new Random();
-            int num1 = random.nextInt(items.size());
-            int num2 = random.nextInt(items.size());
-            Item tempItem = items.get(num1);
-            items.set(num1, items.get(num2));
-            items.set(num2, tempItem);
-        }
     }
 }

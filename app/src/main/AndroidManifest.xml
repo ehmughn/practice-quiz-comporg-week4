@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ComOrgQuizWeek4Practice"
         tools:targetApi="31">
         <activity
+            android:name=".EndlessModeActivity"
+            android:exported="false" />
+        <activity
             android:name=".RandomizedModeActivity"
             android:exported="false" />
         <activity
